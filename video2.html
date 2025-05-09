@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Streaming</title>
+</head>
+<body>
+    <h1>Lecture de la vidéo avec hls.js</h1>
+    <video id="video" width="100%" controls></video>
+
+    <!-- Intégration de hls.js -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        if (Hls.isSupported()) {
+            var video = document.getElementById('video');
+            var hls = new Hls();
+            hls.loadSource('https://mehdivideos.blob.core.windows.net/videos/video.m3u8');
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                video.play();
+            });
+        } else {
+            alert('HLS.js n\'est pas supporté par ce navigateur.');
+        }
+    </script>
+</body>
+</html>
